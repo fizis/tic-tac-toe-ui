@@ -1,0 +1,16 @@
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  background-color: #f1f1f1;
+}
+
+.flex-container > div {
+  background-color: DodgerBlue;
+  color: #fff;
+  margin: 10px;
+  width: 120px;
+  line-height: 120px;
+  font-size: 100px;
+  text-align: center;
+}
