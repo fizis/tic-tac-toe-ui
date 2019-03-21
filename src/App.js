@@ -1,27 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
+import GameBoard from './GameBoard';
 
 class App extends Component {
   render() {
-    return (
-      <div>
-        <div className="flex-container">
-          <div>X</div>
-          <div>O</div>
-          <div>&nbsp;</div>
-        </div>
-        <div className="flex-container">
-          <div>&nbsp;</div>
-          <div>&nbsp;</div>
-          <div>&nbsp;</div>
-        </div>
-        <div className="flex-container">
-          <div>&nbsp;</div>
-          <div>&nbsp;</div>
-          <div>&nbsp;</div>
-        </div>
-      </div>
-    );
+    return ( <GameBoard /> );
   }
 }
 
