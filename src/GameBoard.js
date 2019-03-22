@@ -16,21 +16,28 @@ class GameBoard extends Component {
                 ['', '', '']
             ]
         };
+
+        this.loadBoard = this.loadBoard.bind(this);
     }
 
     componentDidMount() {
+        this.loadBoard();
+    }
+
+    loadBoard() {
+        // use configuration for URL
         // TODO: use real ID
         fetch('http://localhost:3333/games/test_id')
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result);
+                    // console.log(result);
                     this.setState({
                         board: result.board
                     });
                 },
                 (error) => {
-                    console.log(error); // TODO: handle errors
+                    console.log(error); // TODO: handle error
                 }
             )
     }
@@ -40,7 +47,8 @@ class GameBoard extends Component {
             <div className="flex-container">
                 {
                     this.columns.map((x) =>
-                        <Tile x={x} y={y} value={this.state.board[x][y]} />
+                        // TODO: add key property
+                        <Tile x={x} y={y} marker={this.state.board[x][y]} updateBoard={this.loadBoard} />
                     )
                 }
             </div>
