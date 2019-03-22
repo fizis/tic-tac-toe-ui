@@ -6,8 +6,33 @@ class GameBoard extends Component {
     constructor(props) {
         super(props);
         
+        this.id = 'test_id'; // TODO: temporary hardcoded
         this.columns = [0, 1, 2]; // x coordinates
         this.rows = [0, 1, 2]; // y coordinates
+        this.state = {
+            board: [
+                ['', '', ''],
+                ['', '', ''],
+                ['', '', '']
+            ]
+        };
+    }
+
+    componentDidMount() {
+        // TODO: use real ID
+        fetch('http://localhost:3333/games/test_id')
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    this.setState({
+                        board: result.board
+                    });
+                },
+                (error) => {
+                    console.log(error); // TODO: handle errors
+                }
+            )
     }
 
     render() {
@@ -15,7 +40,7 @@ class GameBoard extends Component {
             <div className="flex-container">
                 {
                     this.columns.map((x) =>
-                        <Tile x={x} y={y} />
+                        <Tile x={x} y={y} value={this.state.board[x][y]} />
                     )
                 }
             </div>

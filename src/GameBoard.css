@@ -10,7 +10,8 @@
   color: #fff;
   margin: 10px;
   width: 120px;
-  line-height: 120px;
+  height: 120px;
+  line-height: 90px;
   font-size: 100px;
   text-align: center;
 }

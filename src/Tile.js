@@ -4,7 +4,7 @@ class Tile extends Component {
     constructor(props) {
         super(props);
         
-        console.log(`Tile: x = ${props.x}, y = ${props.y}`);
+        console.log(`Tile: x = ${props.x}, y = ${props.y}, value = ${props.value}`);
 
         this.makeMove = this.makeMove.bind(this);
     }
@@ -16,7 +16,7 @@ class Tile extends Component {
     
     render() {
         return (
-            <div onClick={(e) => this.makeMove(e)}>&nbsp;</div>
+            <div onClick={(e) => this.makeMove(e)}>{this.props.value}</div>
         )
     }
 }
