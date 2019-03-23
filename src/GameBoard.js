@@ -7,9 +7,6 @@ class GameBoard extends Component {
     constructor(props) {
         super(props);
         
-        // TODO: get rid of these two vars
-        this.columns = [0, 1, 2]; // x coordinates
-        this.rows = [0, 1, 2]; // y coordinates
         this.cookieName = 'tic_tac_toe_game_id';
         this.state = {
             id: Cookies.get(this.cookieName),
@@ -134,10 +131,10 @@ class GameBoard extends Component {
     }
 
     render() {
-        const board = this.rows.map((y) =>
+        const board = this.state.board.map((row, y) =>
             <div key={y} className="flex-container">
                 {
-                    this.columns.map((x) =>
+                    row.map((col, x) =>
                         <div className="flex-item" key={x} onClick={() => this.makeMove(x, y)}>
                             {this.state.board[x][y]}
                         </div>
