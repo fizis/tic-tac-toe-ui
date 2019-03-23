@@ -31,8 +31,7 @@ class GameBoard extends Component {
 
         if (typeof this.state.id === 'undefined') {
             this.createGame();
-        }
-        else {
+        } else {
             this.loadGame();
         }
 
@@ -47,7 +46,7 @@ class GameBoard extends Component {
                 'Content-Type': 'application/json',
             }
         })
-        .then(result => result.json())
+        .then(response => response.json())
         .then(
             (result) => {
                 console.log(result);
@@ -70,17 +69,33 @@ class GameBoard extends Component {
     loadGame() {
         // use configuration for URL
         fetch(`http://localhost:3333/games/${this.state.id}`)
-            .then(result => result.json())
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    // TODO: hacky solution - refactor
+                    if (response.status === 404) {
+                        this.createGame();
+                    } else {
+                        throw Error(response.statusText);
+                    }
+                }
+            })
             .then(
                 (result) => {
                     // console.log(result);
-                    this.setState({
-                        board: result.board,
-                        winner: result.winner,
-                        ended: result.ended
-                    });
+                    // TODO: hacky solution - refactor
+                    if (typeof result !== 'undefined') {
+                        this.setState({
+                            board: result.board,
+                            winner: result.winner,
+                            ended: result.ended
+                        });
 
-                    // TODO: handle the end of game
+                        if (result.ended) {
+                            Cookies.remove(this.cookieName);
+                        }
+                    }
                 },
                 (error) => {
                     console.log(error); // TODO: handle error
@@ -108,9 +123,7 @@ class GameBoard extends Component {
 
             if (this.state.winner) {
                 winnerMessage = <div className="flex-container">The winner is&nbsp;<strong>{this.state.winner}</strong></div>;
-            }
-            else
-            {
+            } else {
                 winnerMessage = <div className="flex-container">Draw</div>;
             }
         }

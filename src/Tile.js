@@ -30,7 +30,7 @@ class Tile extends Component {
                 this.props.updateBoard();
             },
             (error) => {
-                console.log(error); // TODO: handle error
+                console.log(error);
             }
         );
     }
