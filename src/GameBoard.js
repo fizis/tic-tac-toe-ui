@@ -17,8 +17,6 @@ class GameBoard extends Component {
             ],
             moves: []
         };
-
-        this.loadGame = this.loadGame.bind(this);
     }
 
     componentDidMount() {
@@ -26,7 +24,7 @@ class GameBoard extends Component {
     }
 
     initGame() {
-        if (typeof this.state.id === 'undefined') {
+        if (!this.state.id) {
             this.createGame();
         } else {
             this.loadGame();
@@ -79,7 +77,7 @@ class GameBoard extends Component {
             .then(
                 (result) => {
                     // TODO: hacky solution - refactor
-                    if (typeof result !== 'undefined') {
+                    if (result) {
                         this.setState({
                             board: result.board,
                             winner: result.winner,
@@ -99,7 +97,7 @@ class GameBoard extends Component {
     }
 
     makeMove(x, y) {
-        console.log(`${x}, ${y} clicked`);
+        console.log(`x = ${x}, y = ${y} clicked`);
 
         if (this.state.ended) {
             this.createGame();
