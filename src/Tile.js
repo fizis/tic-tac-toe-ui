@@ -12,8 +12,7 @@ class Tile extends Component {
         console.log(`${this.props.x}, ${this.props.y} clicked`);
         
         // use configuration for URL
-        // TODO: use real ID
-        fetch('http://localhost:3333/games/test_id/moves', {
+        fetch(`http://localhost:3333/games/${this.props.id}/moves`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
