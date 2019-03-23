@@ -7,6 +7,7 @@ class GameBoard extends Component {
     constructor(props) {
         super(props);
         
+        // TODO: get rid of these two vars
         this.columns = [0, 1, 2]; // x coordinates
         this.rows = [0, 1, 2]; // y coordinates
         this.cookieName = 'tic_tac_toe_game_id';
@@ -36,6 +37,7 @@ class GameBoard extends Component {
     }
 
     createGame() {
+        // TODO: use configuration for URL
         fetch('http://localhost:3333/games', {
             method: 'POST',
             headers: {
@@ -61,10 +63,9 @@ class GameBoard extends Component {
             }
         );
     }
-
-    // TODO: handle empty response error when game is not created yet: "SyntaxError: Unexpected end of JSON input"
+    
     loadGame() {
-        // use configuration for URL
+        // TODO: use configuration for URL
         fetch(`http://localhost:3333/games/${this.state.id}`)
             .then((response) => {
                 if (response.ok) {
@@ -108,7 +109,7 @@ class GameBoard extends Component {
             return;
         }
         
-        // use configuration for URL
+        // TODO: use configuration for URL
         fetch(`http://localhost:3333/games/${this.state.id}/moves`, {
             method: 'POST',
             headers: {
@@ -144,12 +145,6 @@ class GameBoard extends Component {
                 }
             </div>
         );
-        
-        let actionLog;
-
-        if (this.state.moves.length > 0) {
-            actionLog = <ActionLog moves={this.state.moves} />;
-        }
 
         let gameEndMessage;
         let winnerMessage;
@@ -162,6 +157,12 @@ class GameBoard extends Component {
             } else {
                 winnerMessage = <div className="flex-container">Draw</div>;
             }
+        }
+
+        let actionLog;
+
+        if (this.state.moves.length > 0) {
+            actionLog = <ActionLog moves={this.state.moves} />;
         }
 
         return (
