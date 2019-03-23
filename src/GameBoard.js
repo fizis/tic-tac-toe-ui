@@ -105,11 +105,10 @@ class GameBoard extends Component {
 
     render() {
         const board = this.rows.map((y) =>
-            <div className="flex-container">
+            <div key={y} className="flex-container">
                 {
                     this.columns.map((x) =>
-                        // TODO: add key property
-                        <Tile id={this.state.id} x={x} y={y} marker={this.state.board[x][y]} updateBoard={this.loadGame} />
+                        <Tile key={x} id={this.state.id} x={x} y={y} marker={this.state.board[x][y]} updateBoard={this.loadGame} />
                     )
                 }
             </div>
