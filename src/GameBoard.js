@@ -24,6 +24,7 @@ class GameBoard extends Component {
         this.loadBoard();
     }
 
+    // TODO: handle empty response error when game is not created yet: "SyntaxError: Unexpected end of JSON input"
     loadBoard() {
         // use configuration for URL
         // TODO: use real ID
