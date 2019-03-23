@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Cookies from 'js-cookie';
 import './GameBoard.css';
+import ActionLog from './ActionLog';
 
 class GameBoard extends Component {
     constructor(props) {
@@ -15,7 +16,8 @@ class GameBoard extends Component {
                 ['', '', ''],
                 ['', '', ''],
                 ['', '', '']
-            ]
+            ],
+            moves: []
         };
 
         this.loadGame = this.loadGame.bind(this);
@@ -26,15 +28,11 @@ class GameBoard extends Component {
     }
 
     initGame() {
-        console.log(this.state.id);
-
         if (typeof this.state.id === 'undefined') {
             this.createGame();
         } else {
             this.loadGame();
         }
-
-        console.log(this.state.id);
     }
 
     createGame() {
@@ -48,15 +46,13 @@ class GameBoard extends Component {
         .then(response => response.json())
         .then(
             (result) => {
-                console.log(result);
                 this.setState({
                     id: result.id,
                     board: result.board,
                     ended: false,
-                    winner: ''
+                    winner: '',
+                    moves: []
                 });
-
-                console.log(this.state);
 
                 Cookies.set(this.cookieName, result.id);
             },
@@ -84,13 +80,13 @@ class GameBoard extends Component {
             })
             .then(
                 (result) => {
-                    // console.log(result);
                     // TODO: hacky solution - refactor
                     if (typeof result !== 'undefined') {
                         this.setState({
                             board: result.board,
                             winner: result.winner,
-                            ended: result.ended
+                            ended: result.ended,
+                            moves: result.moves
                         });
 
                         if (result.ended) {
@@ -141,13 +137,19 @@ class GameBoard extends Component {
             <div key={y} className="flex-container">
                 {
                     this.columns.map((x) =>
-                        <div key={x} onClick={() => this.makeMove(x, y)}>
+                        <div className="flex-item" key={x} onClick={() => this.makeMove(x, y)}>
                             {this.state.board[x][y]}
                         </div>
                     )
                 }
             </div>
         );
+        
+        let actionLog;
+
+        if (this.state.moves.length > 0) {
+            actionLog = <ActionLog moves={this.state.moves} />;
+        }
 
         let gameEndMessage;
         let winnerMessage;
@@ -167,6 +169,7 @@ class GameBoard extends Component {
                 {board}
                 {gameEndMessage}
                 {winnerMessage}
+                {actionLog}
             </div>
         );
     }

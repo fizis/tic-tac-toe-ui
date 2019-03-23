@@ -5,7 +5,7 @@
   background-color: #f1f1f1;
 }
 
-.flex-container > div {
+.flex-container .flex-item {
   background-color: DodgerBlue;
   color: #fff;
   margin: 10px;
@@ -13,5 +13,10 @@
   height: 120px;
   line-height: 90px;
   font-size: 100px;
+  text-align: center;
+}
+
+.flex-container .actions {
+  margin: 10px;
   text-align: center;
 }
