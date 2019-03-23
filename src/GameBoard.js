@@ -51,7 +51,9 @@ class GameBoard extends Component {
                 console.log(result);
                 this.setState({
                     id: result.id,
-                    board: result.board
+                    board: result.board,
+                    ended: false,
+                    winner: ''
                 });
 
                 console.log(this.state);
@@ -104,6 +106,11 @@ class GameBoard extends Component {
 
     makeMove(x, y) {
         console.log(`${x}, ${y} clicked`);
+
+        if (this.state.ended) {
+            this.createGame();
+            return;
+        }
         
         // use configuration for URL
         fetch(`http://localhost:3333/games/${this.state.id}/moves`, {
