@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Cookies from 'js-cookie';
 import './GameBoard.css';
-import Tile from './Tile';
 
 class GameBoard extends Component {
     constructor(props) {
@@ -103,12 +102,41 @@ class GameBoard extends Component {
             )
     }
 
+    makeMove(x, y) {
+        console.log(`${x}, ${y} clicked`);
+        
+        // use configuration for URL
+        fetch(`http://localhost:3333/games/${this.state.id}/moves`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                x: x,
+                y: y
+            })
+        })
+        .then(
+            (result) => {
+                // TODO: we could use the returned result to update only this tile instead (entire board won't be reloaded then)
+                // but we need to implement action log as well, so we'll need to update GameBoard still.
+                this.loadGame();
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
     render() {
         const board = this.rows.map((y) =>
             <div key={y} className="flex-container">
                 {
                     this.columns.map((x) =>
-                        <Tile key={x} id={this.state.id} x={x} y={y} marker={this.state.board[x][y]} updateBoard={this.loadGame} />
+                        <div key={x} onClick={() => this.makeMove(x, y)}>
+                            {this.state.board[x][y]}
+                        </div>
                     )
                 }
             </div>
