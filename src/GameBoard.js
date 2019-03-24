@@ -3,6 +3,9 @@ import Cookies from 'js-cookie';
 import './GameBoard.css';
 import ActionLog from './ActionLog';
 
+// TODO: move this to .env file
+const API_URL = 'http://localhost:3333';
+
 class GameBoard extends Component {
     constructor(props) {
         super(props);
@@ -24,16 +27,15 @@ class GameBoard extends Component {
     }
 
     initGame() {
-        if (!this.state.id) {
-            this.createGame();
-        } else {
+        if (this.state.id) {
             this.loadGame();
+        } else {
+            this.createGame();
         }
     }
 
     createGame() {
-        // TODO: use configuration for URL
-        fetch('http://localhost:3333/games', {
+        fetch(`${API_URL}/games`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -54,14 +56,13 @@ class GameBoard extends Component {
                 Cookies.set(this.cookieName, result.id);
             },
             (error) => {
-                console.log(error); // TODO: handle error
+                console.log(error);
             }
         );
     }
     
     loadGame() {
-        // TODO: use configuration for URL
-        fetch(`http://localhost:3333/games/${this.state.id}`)
+        fetch(`${API_URL}/games/${this.state.id}`)
             .then((response) => {
                 if (response.ok) {
                     return response.json();
@@ -91,7 +92,7 @@ class GameBoard extends Component {
                     }
                 },
                 (error) => {
-                    console.log(error); // TODO: handle error
+                    console.log(error);
                 }
             )
     }
@@ -104,8 +105,7 @@ class GameBoard extends Component {
             return;
         }
         
-        // TODO: use configuration for URL
-        fetch(`http://localhost:3333/games/${this.state.id}/moves`, {
+        fetch(`${API_URL}/games/${this.state.id}/moves`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

@@ -6,6 +6,8 @@ Game description: https://en.wikipedia.org/wiki/Tic-tac-toe
 
 The UI uses [**Tic Tac Toe Game API**](https://github.com/fizis/tic-tac-toe-api) under the hood.
 
+For now API_URL can be configured in GameBoard.js file.
+
 ## Launch and Test
 
 ### Prerequisites
@@ -18,8 +20,13 @@ https://docs.docker.com/install/
 
 ### Build & Run
 
-`npm run build`
+Development:
 `npm start`
+
+Production:
+`npm run build`
+`npm install -g serve`
+`serve -s build`
 
 ### Test
 
