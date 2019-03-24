@@ -118,8 +118,6 @@ class GameBoard extends Component {
         })
         .then(
             (result) => {
-                // TODO: we could use the returned result to update only this tile instead (entire board won't be reloaded then)
-                // but we need to implement action log as well, so we'll need to update GameBoard still.
                 this.loadGame();
             },
             (error) => {
