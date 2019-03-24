@@ -2,6 +2,10 @@
 
 Game description: https://en.wikipedia.org/wiki/Tic-tac-toe
 
+## Backend - API
+
+The UI uses [**Tic Tac Toe Game API**](https://github.com/fizis/tic-tac-toe-api) under the hood.
+
 ## Launch and Test
 
 ### Prerequisites
