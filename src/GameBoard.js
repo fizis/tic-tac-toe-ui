@@ -7,6 +7,7 @@ import ActionLog from './ActionLog';
 const API_URL = 'http://localhost:3333';
 
 // TODO: write more UTs
+// TODO: introduce Redux
 class GameBoard extends Component {
     constructor(props) {
         super(props);
