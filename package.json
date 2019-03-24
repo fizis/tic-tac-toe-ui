@@ -1,6 +1,8 @@
 {
   "name": "tic-tac-toe-ui",
   "version": "0.1.0",
+  "description": "Tic Tac Toe Game UI",
+  "repository": "https://github.com/fizis/tic-tac-toe-ui.git",
   "private": true,
   "dependencies": {
     "js-cookie": "^2.2.0",
