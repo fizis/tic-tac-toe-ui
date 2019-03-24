@@ -6,6 +6,7 @@ import ActionLog from './ActionLog';
 // TODO: move this to .env file
 const API_URL = 'http://localhost:3333';
 
+// TODO: write more UTs
 class GameBoard extends Component {
     constructor(props) {
         super(props);
