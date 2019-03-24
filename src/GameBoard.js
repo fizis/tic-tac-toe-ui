@@ -127,6 +127,7 @@ class GameBoard extends Component {
         );
     }
 
+    // TODO: split into smaller components
     render() {
         const board = this.state.board.map((row, y) =>
             <div key={y} className="flex-container">
