@@ -8,6 +8,7 @@ const API_URL = 'http://localhost:3333';
 
 // TODO: write more UTs
 // TODO: introduce Redux
+// TODO: write a wrapper for .fetch() to avoid duplicate code
 class GameBoard extends Component {
     constructor(props) {
         super(props);
