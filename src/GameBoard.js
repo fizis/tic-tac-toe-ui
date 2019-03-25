@@ -113,10 +113,7 @@ class GameBoard extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                x: x,
-                y: y
-            })
+            body: JSON.stringify({ x, y })
         })
         .then(
             (result) => {
